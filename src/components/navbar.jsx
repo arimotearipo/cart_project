@@ -1,11 +1,14 @@
-import React from "react";
+import React, {useContext} from "react";
+import ShopContext from "../context/shopcontext";
 
 // Passed as props from App.js: setShowShop={setShowShop}
-const Navbar = (props) => {
+const Navbar = () => {
+
+	const {setShowShop} = useContext(ShopContext);
 	return (
 		<div>
-			<h3 onClick={() => props.setShowShop(true)}>Products</h3>
-			<h3 onClick={() => props.setShowShop(false)}>My Cart</h3>
+			<button className="shopBtn" onClick={() => setShowShop(true)}>Products</button>
+			<button className="cartBtn" onClick={() => setShowShop(false)}>My Cart</button>
 		</div>
 	);
 };

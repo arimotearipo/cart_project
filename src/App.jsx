@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Navbar from "./components/navbar";
 import Shop from "./components/shop";
 import Cart from "./components/cart";
+import ShopContext from "./context/shopcontext"
 
 const App = () => {
 	const [cart, setCart] = useState([]);
@@ -22,14 +23,15 @@ const App = () => {
 	};
 
 	return (
-		<div>
-			<Navbar setShowShop={setShowShop}></Navbar>
+		<ShopContext.Provider value={{setShowShop, addToCart, cart, setCart, updateQty}}>
+			<Navbar></Navbar>
 			{showShop ? (
-				<Shop addToCart={addToCart}></Shop>
+				<Shop></Shop>
 			) : (
-				<Cart cart={cart} setCart={setCart} updateQty={updateQty}></Cart>
+				<Cart></Cart>
 			)}
-		</div>
+		</ShopContext.Provider>
+			
 	);
 };
 

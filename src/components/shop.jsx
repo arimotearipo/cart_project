@@ -2,11 +2,11 @@ import React from "react";
 import list from "../data";
 import Product from "./product";
 
-const Shop = (prop) => {
+const Shop = () => {
 	return (
 		<div>
 			{list.map((item) => {
-				return <Product key={item.id} item={item} addToCart={prop.addToCart} />;
+				return <Product key={item.id} item={item}/>;
 			})}
 		</div>
 	);

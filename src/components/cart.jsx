@@ -1,23 +1,26 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
+import ShopContext from "../context/shopcontext";
 
-// prop passed from App.js : cart={cart} setCart={setCart} updateCart={updateCart}
-const Cart = (prop) => {
+// prop passed from App.js : cart={cart} setCart={setCart} updateQty={updateQty}
+const Cart = () => {
+
+	const {cart, setCart, updateQty} = useContext(ShopContext);
 	const [totalAmount, setTotalAmount] = useState(0);
 
 	// Will delete the item on the selected index by using the filter method
 	// The cart will be changed and updated
 	// Will then call updatedPrice() to recalculate the total price
 	const deleteItem = (idx) => {
-		const updatedCart = prop.cart.filter((item) => {
+		const updatedCart = cart.filter((item) => {
 			return item.id !== idx;
 		});
-		prop.setCart(updatedCart);
+		setCart(updatedCart);
 		updateTotalAmount();
 	};
 
 	const updateTotalAmount = () => {
 		let sum = 0;
-		prop.cart.map((item) => (sum += item.amount * item.price));
+		cart.map((item) => (sum += item.amount * item.price));
 		setTotalAmount(sum);
 	};
 
@@ -27,14 +30,14 @@ const Cart = (prop) => {
 
 	return (
 		<div>
-			{prop.cart.map((item) => (
+			{cart.map((item) => (
 				<div className="cartproduct" key={item.id}>
 					<p>Product: {item.name}</p> <p>Price: ${item.price}</p>
 					<p>Quantity: {item.amount}</p>
-					<button className="updateQtyBtn" type="button" onClick={() => prop.updateQty(item, 1)}>
+					<button className="updateQtyBtn" type="button" onClick={() => updateQty(item, 1)}>
 						+
 					</button>
-					<button className="updateQtyBtn" type="button" onClick={() => prop.updateQty(item, -1)}>
+					<button className="updateQtyBtn" type="button" onClick={() => updateQty(item, -1)}>
 						-
 					</button>
 					<div>
