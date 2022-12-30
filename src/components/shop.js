@@ -6,7 +6,7 @@ const Shop = () => {
 	return (
 		<div>
 			{list.map((item) => {
-				return <Product key={item.id} item={item}/>;
+				return <Product key={item.id} item={item} />;
 			})}
 		</div>
 	);
